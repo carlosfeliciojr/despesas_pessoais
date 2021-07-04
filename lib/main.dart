@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:despesas_pessoais/components/chart.dart';
 import 'package:despesas_pessoais/components/transaction_form.dart';
 import 'package:flutter/material.dart';
 
@@ -40,18 +41,30 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final List<Transaction> _transactions = [
-    // Transaction(
-    //     title: 'Novo tenis de corrida',
-    //     value: 310.50,
-    //     date: DateTime.now(),
-    //     id: 't1'),
-    // Transaction(
-    //   title: 'Conta de luz',
-    //   value: 150.20,
-    //   date: DateTime.now(),
-    //   id: 't2',
-    // ),
+    Transaction(
+        title: 'Conta antiga',
+        value: 400,
+        date: DateTime.now().subtract(Duration(days: 33)),
+        id: 't0'),
+    Transaction(
+        title: 'Novo tenis de corrida',
+        value: 310.50,
+        date: DateTime.now().subtract(Duration(days: 3)),
+        id: 't1'),
+    Transaction(
+      title: 'Conta de luz',
+      value: 150.20,
+      date: DateTime.now().subtract(Duration(days: 4)),
+      id: 't2',
+    ),
   ];
+
+  List<Transaction> get _recentTransactions {
+    return _transactions.where((transaction) {
+      return transaction.date
+          .isAfter(DateTime.now().subtract(Duration(days: 7)));
+    }).toList();
+  }
 
   _addTransation(String title, double value) {
     final newTransaction = Transaction(
@@ -96,13 +109,7 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Container(
-              child: Card(
-                color: Colors.blue,
-                child: Text('gráfico'),
-                elevation: 5,
-              ),
-            ),
+            Chart(recentTransactions: _recentTransactions),
             TransactionList(transactions: _transactions),
           ],
         ),
