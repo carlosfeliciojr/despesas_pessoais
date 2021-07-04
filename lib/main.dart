@@ -95,7 +95,12 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final appBar = AppBar(
       backgroundColor: Colors.purple,
-      title: Text('Despesas Pessoais'),
+      title: Text(
+        'Despesas Pessoais',
+        style: TextStyle(
+          fontSize: 16 * MediaQuery.of(context).textScaleFactor,
+        ),
+      ),
       actions: [
         IconButton(
           onPressed: () => _openTransactionFormModal(context),
