@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
     ),
   ];
 
-  addTransation(String title, double value) {
+  _addTransation(String title, double value) {
     final newTransaction = Transaction(
       id: Random().nextDouble().toString(),
       title: title,
@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
         context: context,
         builder: (_) {
           return TransactionForm(
-            onSubmit: (String, double) {},
+            onSubmit: _addTransation,
           );
         });
   }
