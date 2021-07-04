@@ -26,6 +26,12 @@ class Chart extends StatelessWidget {
       }
 
       return {'day': DateFormat.E().format(weekDay)[0], 'value': totalSum};
+    }).reversed.toList();
+  }
+
+  double get _weelTotalValue {
+    return groupedTransactions.fold(0.0, (sum, transaction) {
+      return sum + (transaction['value'] as double);
     });
   }
 
@@ -35,13 +41,23 @@ class Chart extends StatelessWidget {
     return Card(
       elevation: 6,
       margin: EdgeInsets.all(20),
-      child: Row(
-        children: groupedTransactions.map((transaction) {
-          return ChartBar(
-              label: transaction['day'].toString(),
-              value: double.tryParse(transaction['value'].toString()) ?? 0.0,
-              percentage: 0.5);
-        }).toList(),
+      child: Padding(
+        padding: const EdgeInsets.all(10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: groupedTransactions.map((transaction) {
+            return Flexible(
+              fit: FlexFit.tight,
+              child: ChartBar(
+                  label: transaction['day'].toString(),
+                  value:
+                      double.tryParse(transaction['value'].toString()) ?? 0.0,
+                  percentage: (_weelTotalValue == 0
+                      ? 0
+                      : (transaction['value'] as double) / _weelTotalValue)),
+            );
+          }).toList(),
+        ),
       ),
     );
   }
