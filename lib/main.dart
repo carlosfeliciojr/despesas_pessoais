@@ -82,10 +82,19 @@ class HomePage extends StatelessWidget {
                         style: TextStyle(color: Colors.grey),
                       )
                     ],
-                  )
+                  ),
                 ],
               ));
             }).toList(),
+          ),
+          Card(
+            elevation: 5,
+            child: Column(
+              children: [
+                TextField(),
+                TextField(),
+              ],
+            ),
           )
         ],
       ),
