@@ -18,9 +18,15 @@ class ExpensesApp extends StatelessWidget {
     return MaterialApp(
       home: HomePage(),
       theme: ThemeData(
-        primarySwatch: Colors.purple,
-        accentColor: Colors.amber,
-      ),
+          primarySwatch: Colors.purple,
+          accentColor: Colors.amber,
+          fontFamily: 'Quicksand',
+          appBarTheme: AppBarTheme(
+              textTheme: ThemeData.light().textTheme.copyWith(
+                  headline6: TextStyle(
+                      fontFamily: 'OpenSans',
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700)))),
     );
   }
 }
@@ -33,18 +39,18 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final _transactions = [
-    Transaction(
-        title: 'Novo tenis de corrida',
-        value: 310.50,
-        date: DateTime.now(),
-        id: 't1'),
-    Transaction(
-      title: 'Conta de luz',
-      value: 150.20,
-      date: DateTime.now(),
-      id: 't2',
-    ),
+  final List<Transaction> _transactions = [
+    // Transaction(
+    //     title: 'Novo tenis de corrida',
+    //     value: 310.50,
+    //     date: DateTime.now(),
+    //     id: 't1'),
+    // Transaction(
+    //   title: 'Conta de luz',
+    //   value: 150.20,
+    //   date: DateTime.now(),
+    //   id: 't2',
+    // ),
   ];
 
   _addTransation(String title, double value) {
